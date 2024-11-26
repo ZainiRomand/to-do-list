@@ -1,0 +1,103 @@
+body {
+    display: grid;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    /* background-color: #011627; */
+    background-color: #f4f4f4;
+}
+
+#app {
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto;
+    background-color: #FFC914;
+    /* background-color: white; */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+#task-input {
+    width: 100%;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#add-task-btn,
+#add-weather-btn,
+#toggle-mode-btn {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+#add-task-btn:hover,
+#add-weather-btn:hover,
+#toggle-mode-btn:hover {
+    background-color: #357266;
+    /* background-color: #218838; */
+}
+
+#toggle-mode-btn {
+    display: inline-flex;
+    padding: 10px 15px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+#toggle-mode-btn:hover {
+    background-color: #357266;
+    /* background-color: #218838; */
+}
+
+.task {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.task.completed {
+    text-decoration: line-through;
+    background-color: #d4edda;
+}
+
+.delete-btn {
+    background-color: #da2c38;
+    /* background-color: red; */
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* table, th, td {
+    border: 1px solid black;
+  } */
