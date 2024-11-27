@@ -14,7 +14,6 @@ addWeatherBtn.style.visibility = 'hidden';
 
 // Function to render tasks
 function renderTasks() {
-
     taskInput.focus();
 
     taskList.innerHTML = '';
@@ -60,19 +59,21 @@ function renderTasks() {
         taskDiv.appendChild(tdTask);
 
         // Delete icon
-        const tdDelete = document.createElement('td');
+        if (mode == 'task') {
 
-        const deleteIcon = document.createElement('button');
-        deleteIcon.style.cssText = "border: none; background-color: transparent;";
-        deleteIcon.innerHTML = '<h2><i class="bi bi-x-lg"></i></h2>';
-        deleteIcon.onclick = () => {
-            if (confirm("Proceed to delete?"))
-                deleteTask(index);
+            const tdDelete = document.createElement('td');
+
+            const deleteIcon = document.createElement('button');
+            deleteIcon.style.cssText = "border: none; background-color: transparent;";
+            deleteIcon.innerHTML = '<h2><i class="bi bi-x-lg"></i></h2>';
+            deleteIcon.onclick = () => {
+                if (confirm("Proceed to delete?"))
+                    deleteTask(index);
+            }
+            tdDelete.appendChild(deleteIcon);
+
+            taskDiv.appendChild(tdDelete);
         }
-        tdDelete.appendChild(deleteIcon);
-
-        taskDiv.appendChild(tdDelete);
-
 
         // Append to task list division
         taskList.appendChild(taskDiv);
@@ -141,7 +142,7 @@ function addWeatherInfo() {
         const count = json.data.records[0].forecasts.length;
         for (let i = 0; i < count; i++) {
             let task = {
-                text: json.data.records[0].forecasts[i].day + "  :  " + json.data.records[0].forecasts[i].forecast.text,
+                text: `${json.data.records[0].forecasts[i].day}: ${json.data.records[0].forecasts[i].forecast.text}`,
                 completed: false,
                 type: 'weather'
             }
@@ -158,7 +159,7 @@ function addWeatherInfo() {
 addTaskBtn.addEventListener('click', addTask);
 // Event listener for weather task
 addWeatherBtn.addEventListener('click', addWeatherInfo);
-// Event listener for weather task
+// Event listener for switching mode
 toggleModeBtn.addEventListener('click', () => {
     taskList.innerHTML = "";
     tasks = [];

@@ -1,5 +1,4 @@
 body {
-    display: grid;
     font-family: Arial, sans-serif;
     padding: 20px;
     /* background-color: #011627; */
@@ -98,6 +97,10 @@ h1 {
     background-color: #c82333;
 }
 
+#top-btn-holder {
+    display: flex;
+    justify-content: space-around;
+}
 /* table, th, td {
     border: 1px solid black;
   } */
