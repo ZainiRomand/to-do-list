@@ -35,9 +35,7 @@ function renderTasks() {
             completedIcon.onclick = () => toggleComplete(index);
             if (tasks[index].completed) {
                 completedIcon.innerHTML = '<h4><i class="bi bi-check-square-fill"></i></h4>';
-                completedIcon.innerHTML = '<h4><i class="bi bi-check-square-fill"></i></h4>';
             } else {
-                completedIcon.innerHTML = '<h4><i class="bi bi-check-square"></i></h4>';
                 completedIcon.innerHTML = '<h4><i class="bi bi-check-square"></i></h4>';
             }
             tdComplete.appendChild(completedIcon);
@@ -68,12 +66,13 @@ function renderTasks() {
             const editIcon = document.createElement('button');
             editIcon.style.cssText = "border: none; background-color: transparent;";
             editIcon.innerHTML = `<h4><i class="bi bi-pencil-square"></i></h4>`;
-            editIcon.innerHTML = `<h4><i class="bi bi-pencil-square"></i></h4>`;
             editIcon.onclick = () => {
                 taskInput.value = task.text;
                 tasks[index].text = prompt("Edit task:", task.text);
+                taskInput.value = '';
                 saveTasks();
                 renderTasks();
+                alert('Task updated')
             }
 
             tdEdit.appendChild(editIcon);
@@ -87,7 +86,6 @@ function renderTasks() {
 
             const deleteIcon = document.createElement('button');
             deleteIcon.style.cssText = "border: none; background-color: transparent;";
-            deleteIcon.innerHTML = '<h4><i class="bi bi-x-lg"></i></h4>';
             deleteIcon.innerHTML = '<h4><i class="bi bi-x-lg"></i></h4>';
             deleteIcon.onclick = () => {
                 if (confirm("Proceed to delete?"))
@@ -163,9 +161,6 @@ function saveTasks() {
 function addWeatherInfo() {
     tasks = [];
     taskList.innerHTML = '';
-
-    // let jsonData = getWeatherForecast();
-    // let promise = jsonData;
 
     let promise = getWeatherForecast();
     promise.then(resolve, reject);
