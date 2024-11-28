@@ -34,9 +34,9 @@ function renderTasks() {
             completedIcon.style.cssText = "border: none; background-color: transparent;";
             completedIcon.onclick = () => toggleComplete(index);
             if (tasks[index].completed) {
-                completedIcon.innerHTML = '<h2><i class="bi bi-check-square-fill"></i></h2>';
+                completedIcon.innerHTML = '<h3><i class="bi bi-check-square-fill"></i></h3>';
             } else {
-                completedIcon.innerHTML = '<h2><i class="bi bi-check-square"></i></h2>';
+                completedIcon.innerHTML = '<h3><i class="bi bi-check-square"></i></h3>';
             }
             tdComplete.appendChild(completedIcon);
             taskDiv.appendChild(tdComplete);
@@ -66,7 +66,7 @@ function renderTasks() {
 
             const editIcon = document.createElement('button');
             editIcon.style.cssText = "border: none; background-color: transparent;";
-            editIcon.innerHTML = `<h2><i class="bi bi-pencil-square"></i></h2>`;
+            editIcon.innerHTML = `<h3><i class="bi bi-pencil-square"></i></h3>`;
             editIcon.onclick = () => {
                 taskInput.value = task.text;
                 tasks[index].text = prompt("Edit task:", task.text);
@@ -86,7 +86,7 @@ function renderTasks() {
 
             const deleteIcon = document.createElement('button');
             deleteIcon.style.cssText = "border: none; background-color: transparent;";
-            deleteIcon.innerHTML = '<h2><i class="bi bi-x-lg"></i></h2>';
+            deleteIcon.innerHTML = '<h3><i class="bi bi-x-lg"></i></h3>';
             deleteIcon.onclick = () => {
                 if (confirm("Proceed to delete?"))
                     deleteTask(index);
@@ -189,9 +189,13 @@ toggleModeBtn.addEventListener('click', () => {
         addWeatherBtn.style.visibility = 'hidden';
         tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         renderTasks();
+        taskInput.style.visibility = 'visible';
+        taskInput.value = 'Enter a new task...';
     } else {
         addTaskBtn.style.visibility = 'hidden';
         addWeatherBtn.style.visibility = 'visible';
+        taskInput.style.visibility = 'hidden';
+        taskInput.disabled = true;
     }
 });
 
