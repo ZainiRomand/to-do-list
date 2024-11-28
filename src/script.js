@@ -60,21 +60,38 @@ function renderTasks() {
         // Edit icon
         if (task.type == 'task') {
             // Mark as completed button
-            const tdEdit = document.createElement('td');
-            // Completed icon
 
+
+            const tdEdit = document.createElement('td');
             const editIcon = document.createElement('button');
             editIcon.style.cssText = "border: none; background-color: transparent;";
             editIcon.innerHTML = `<h4><i class="bi bi-pencil-square"></i></h4>`;
             editIcon.onclick = () => {
-                taskInput.value = task.text;
-                tasks[index].text = prompt("Edit task:", task.text);
-                taskInput.value = '';
-                saveTasks();
-                renderTasks();
-                alert('Task updated')
-            }
 
+
+                const temp = prompt("Edit task:", task.text);
+
+                // Prevent an empty task added into list
+                if (temp != '') {
+                    isDiplucate = false;
+                    if (temp != task.text) {
+                        tasks.forEach(task => {
+                            if (temp === task.text) {
+                                alert('A duplicated task found in the list');
+                                isDiplucate = true;
+                            }
+                        });
+                        if (!isDiplucate) {
+                            tasks[index].text = temp;
+                            saveTasks();
+                            renderTasks();
+                            alert('Please verify that task has been updated')
+                        }
+                    }
+                } else {
+                    alert('A blank task is not accepted')
+                }
+            }
             tdEdit.appendChild(editIcon);
             taskDiv.appendChild(tdEdit);
         }
@@ -119,7 +136,7 @@ function addTask() {
     } else {
         tasks.forEach(task => {
             if (taskText === task.text) {
-                alert('Duplicated task found');
+                alert('A duplicated task found in the list');
                 isDiplucate = true;
             }
         });
