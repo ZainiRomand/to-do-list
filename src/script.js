@@ -35,7 +35,9 @@ function renderTasks() {
             completedIcon.onclick = () => toggleComplete(index);
             if (tasks[index].completed) {
                 completedIcon.innerHTML = '<h3><i class="bi bi-check-square-fill"></i></h3>';
+                completedIcon.innerHTML = '<h3><i class="bi bi-check-square-fill"></i></h3>';
             } else {
+                completedIcon.innerHTML = '<h3><i class="bi bi-check-square"></i></h3>';
                 completedIcon.innerHTML = '<h3><i class="bi bi-check-square"></i></h3>';
             }
             tdComplete.appendChild(completedIcon);
@@ -67,6 +69,7 @@ function renderTasks() {
             const editIcon = document.createElement('button');
             editIcon.style.cssText = "border: none; background-color: transparent;";
             editIcon.innerHTML = `<h3><i class="bi bi-pencil-square"></i></h3>`;
+            editIcon.innerHTML = `<h3><i class="bi bi-pencil-square"></i></h3>`;
             editIcon.onclick = () => {
                 taskInput.value = task.text;
                 tasks[index].text = prompt("Edit task:", task.text);
@@ -86,6 +89,7 @@ function renderTasks() {
 
             const deleteIcon = document.createElement('button');
             deleteIcon.style.cssText = "border: none; background-color: transparent;";
+            deleteIcon.innerHTML = '<h3><i class="bi bi-x-lg"></i></h3>';
             deleteIcon.innerHTML = '<h3><i class="bi bi-x-lg"></i></h3>';
             deleteIcon.onclick = () => {
                 if (confirm("Proceed to delete?"))
