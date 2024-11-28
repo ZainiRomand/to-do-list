@@ -72,7 +72,7 @@ function renderTasks() {
                 const temp = prompt("Edit task:", task.text);
 
                 // Prevent an empty task added into list
-                if (temp != '') {
+                if (temp != '' && temp != null) {
                     isDiplucate = false;
                     if (temp != task.text) {
                         tasks.forEach(task => {
@@ -88,8 +88,10 @@ function renderTasks() {
                             alert('Please verify that task has been updated')
                         }
                     }
-                } else {
-                    alert('A blank task is not accepted')
+                } else if (temp == '') {
+                    alert('A blank task is not accepted');
+                } else if (temp == null) {
+                    // Do nothing
                 }
             }
             tdEdit.appendChild(editIcon);
