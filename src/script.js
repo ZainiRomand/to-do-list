@@ -58,6 +58,27 @@ function renderTasks() {
 
         taskDiv.appendChild(tdTask);
 
+        // Edit icon
+        if (task.type == 'task') {
+            // Mark as completed button
+            const tdEdit = document.createElement('td');
+            // Completed icon
+
+            const editIcon = document.createElement('button');
+            editIcon.style.cssText = "border: none; background-color: transparent;";
+            editIcon.innerHTML = `<h2><i class="bi bi-pencil-square"></i></h2>`;
+            editIcon.onclick = () => {
+                taskInput.value = task.text;
+                tasks[index].text = prompt("Edit task:", task.text);
+                taskInput.value = 'Enter a new task...';
+                saveTasks();
+                renderTasks();
+            }
+
+            tdEdit.appendChild(editIcon);
+            taskDiv.appendChild(tdEdit);
+        }
+
         // Delete icon
         if (mode == 'task') {
 
@@ -71,7 +92,6 @@ function renderTasks() {
                     deleteTask(index);
             }
             tdDelete.appendChild(deleteIcon);
-
             taskDiv.appendChild(tdDelete);
         }
 
