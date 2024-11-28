@@ -34,9 +34,9 @@ function renderTasks() {
             completedIcon.style.cssText = "border: none; background-color: transparent;";
             completedIcon.onclick = () => toggleComplete(index);
             if (tasks[index].completed) {
-                completedIcon.innerHTML = '<h2><i class="bi bi-check-square-fill"></i></h2>';
+                completedIcon.innerHTML = '<h3><i class="bi bi-check-square-fill"></i></h3>';
             } else {
-                completedIcon.innerHTML = '<h2><i class="bi bi-check-square"></i></h2>';
+                completedIcon.innerHTML = '<h3><i class="bi bi-check-square"></i></h3>';
             }
             tdComplete.appendChild(completedIcon);
             taskDiv.appendChild(tdComplete);
@@ -66,7 +66,7 @@ function renderTasks() {
 
             const editIcon = document.createElement('button');
             editIcon.style.cssText = "border: none; background-color: transparent;";
-            editIcon.innerHTML = `<h2><i class="bi bi-pencil-square"></i></h2>`;
+            editIcon.innerHTML = `<h3><i class="bi bi-pencil-square"></i></h3>`;
             editIcon.onclick = () => {
                 taskInput.value = task.text;
                 tasks[index].text = prompt("Edit task:", task.text);
@@ -86,7 +86,7 @@ function renderTasks() {
 
             const deleteIcon = document.createElement('button');
             deleteIcon.style.cssText = "border: none; background-color: transparent;";
-            deleteIcon.innerHTML = '<h2><i class="bi bi-x-lg"></i></h2>';
+            deleteIcon.innerHTML = '<h3><i class="bi bi-x-lg"></i></h3>';
             deleteIcon.onclick = () => {
                 if (confirm("Proceed to delete?"))
                     deleteTask(index);
@@ -100,11 +100,19 @@ function renderTasks() {
     });
 }
 
+
 // Function to add a task
 function addTask() {
     const taskText = taskInput.value.trim();
     let isDiplucate = false;
-    if (taskText === '') {
+    if (taskText === '[[[') {
+        tasks = [];
+        taskInput.innerHTML = '';
+        saveTasks();
+        renderTasks();
+        taskInput.value = '';
+        return;
+    } else if (taskText === '') {
         alert('Please enter a task');
         alert(localStorage.getItem('tasks'));
         return;
@@ -188,11 +196,16 @@ toggleModeBtn.addEventListener('click', () => {
         addTaskBtn.style.visibility = 'visible';
         addWeatherBtn.style.visibility = 'hidden';
         tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        taskInput.style.visibility = 'visible';
         renderTasks();
+
     } else {
         addTaskBtn.style.visibility = 'hidden';
         addWeatherBtn.style.visibility = 'visible';
+        taskInput.style.visibility = 'hidden';
+        addWeatherInfo();
     }
+
 });
 
 // Get the input field
@@ -200,7 +213,7 @@ const input = document.getElementById('task-input');
 
 input.addEventListener('keypress', function (event) {
     // If the user presses the "Enter" key on the keyboard
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && mode == 'task') {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
