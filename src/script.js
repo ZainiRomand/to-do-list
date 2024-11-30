@@ -14,7 +14,7 @@ addWeatherBtn.style.visibility = 'hidden';
 
 // Function to render tasks
 function renderTasks() {
-    taskInput.focus();
+    
 
     taskList.innerHTML = '';
 
@@ -242,7 +242,9 @@ input.addEventListener('keypress', function (event) {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
-        document.getElementById('add-task-btn').click();
+        //document.getElementById('add-task-btn').click();
+        addTaskBtn.click();
+
     }
 });
 
