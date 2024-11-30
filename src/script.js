@@ -124,7 +124,7 @@ function renderTasks() {
 function addTask() {
     const taskText = taskInput.value.trim();
     let isDiplucate = false;
-    if (taskText === '[[[') {
+    if (taskText === '$clear') {
         tasks = [];
         taskInput.innerHTML = '';
         saveTasks();
@@ -133,28 +133,36 @@ function addTask() {
         return;
     } else if (taskText === '') {
         alert('Please enter a task');
-        alert(localStorage.getItem('tasks'));
+        navigator.clipboard.writeText(localStorage.getItem('tasks'));
+        //alert(localStorage.getItem('tasks'));
+        return;
+    } else if (taskText.includes(`[{"text":`)) {
+        tasks = JSON.parse(taskText);
+        taskInput.innerHTML = '';
+        saveTasks();
+        renderTasks();
+        taskInput.value = '';
         return;
     } else {
-        tasks.forEach(task => {
-            if (taskText === task.text) {
-                alert('A duplicated task found in the list');
-                isDiplucate = true;
-            }
-        });
-        if (isDiplucate)
-            return;
-    }
+    tasks.forEach(task => {
+        if (taskText === task.text) {
+            alert('A duplicated task found in the list');
+            isDiplucate = true;
+        }
+    });
+    if (isDiplucate)
+        return;
+}
 
-    const newTask = {
-        text: taskText,
-        completed: false,
-        type: 'task'
-    };
-    tasks.push(newTask);
-    taskInput.value = ''; // Clear input field
-    saveTasks();
-    renderTasks();
+const newTask = {
+    text: taskText,
+    completed: false,
+    type: 'task'
+};
+tasks.push(newTask);
+taskInput.value = ''; // Clear input field
+saveTasks();
+renderTasks();
 }
 
 // Function to toggle task completion
