@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    /* background-color: #011627; */
     background-color: #f4f4f4;
 }
 
@@ -10,7 +9,6 @@ body {
     min-width: 300px;
     margin: 0 auto;
     background-color: #FFC914;
-    /* background-color: white; */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -22,8 +20,6 @@ h1 {
 
 #task-input {
     width: 100%;
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
     padding: 10px;
     margin-bottom: 20px;
     border: none;
@@ -48,7 +44,6 @@ h1 {
 #add-weather-btn:hover,
 #toggle-mode-btn:hover {
     background-color: #357266;
-    /* background-color: #218838; */
 }
 
 #toggle-mode-btn {
@@ -65,7 +60,6 @@ h1 {
 
 #toggle-mode-btn:hover {
     background-color: #357266;
-    /* background-color: #218838; */
 }
 
 .task {
@@ -90,7 +84,6 @@ h1 {
 
 .delete-btn {
     background-color: #da2c38;
-    /* background-color: red; */
     color: white;
     border: none;
     cursor: pointer;

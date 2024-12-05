@@ -14,8 +14,6 @@ addWeatherBtn.style.visibility = 'hidden';
 
 // Function to render tasks
 function renderTasks() {
-    
-
     taskList.innerHTML = '';
 
     tasks.forEach((task, index) => {
@@ -45,32 +43,20 @@ function renderTasks() {
         // Task content
         const tdTask = document.createElement('td');
         const taskText = document.createElement('span');
-
         taskText.value = task.text
-        //taskText.maxLength = 25;
-
         taskText.textContent = task.text;
-        //taskText.textContent = (index + 1).toString() + ")  " + task.text;
-
         tdTask.appendChild(taskText);
         tdTask.style.cssText = "width: 90%;";
-
         taskDiv.appendChild(tdTask);
 
         // Edit icon
         if (task.type == 'task') {
-            // Mark as completed button
-
-
             const tdEdit = document.createElement('td');
             const editIcon = document.createElement('button');
             editIcon.style.cssText = "border: none; background-color: transparent;";
             editIcon.innerHTML = `<h4><i class="bi bi-pencil-square"></i></h4>`;
             editIcon.onclick = () => {
-
-
                 const temp = prompt("Edit task:", task.text);
-
                 // Prevent an empty task added into list
                 if (temp != '' && temp != null) {
                     isDiplucate = false;
@@ -100,9 +86,7 @@ function renderTasks() {
 
         // Delete icon
         if (mode == 'task') {
-
             const tdDelete = document.createElement('td');
-
             const deleteIcon = document.createElement('button');
             deleteIcon.style.cssText = "border: none; background-color: transparent;";
             deleteIcon.innerHTML = '<h4><i class="bi bi-x-lg"></i></h4>';
@@ -113,12 +97,10 @@ function renderTasks() {
             tdDelete.appendChild(deleteIcon);
             taskDiv.appendChild(tdDelete);
         }
-
         // Append to task list division
         taskList.appendChild(taskDiv);
     });
 }
-
 
 // Function to add a task
 function addTask() {
@@ -134,7 +116,6 @@ function addTask() {
     } else if (taskText === '') {
         alert('Please enter a task');
         navigator.clipboard.writeText(localStorage.getItem('tasks'));
-        //alert(localStorage.getItem('tasks'));
         return;
     } else if (taskText.includes(`[{"text":`)) {
         tasks = JSON.parse(taskText);
@@ -144,25 +125,25 @@ function addTask() {
         taskInput.value = '';
         return;
     } else {
-    tasks.forEach(task => {
-        if (taskText === task.text) {
-            alert('A duplicated task found in the list');
-            isDiplucate = true;
-        }
-    });
-    if (isDiplucate)
-        return;
-}
+        tasks.forEach(task => {
+            if (taskText === task.text) {
+                alert('A duplicated task found in the list');
+                isDiplucate = true;
+            }
+        });
+        if (isDiplucate)
+            return;
+    }
 
-const newTask = {
-    text: taskText,
-    completed: false,
-    type: 'task'
-};
-tasks.push(newTask);
-taskInput.value = ''; // Clear input field
-saveTasks();
-renderTasks();
+    const newTask = {
+        text: taskText,
+        completed: false,
+        type: 'task'
+    };
+    tasks.push(newTask);
+    taskInput.value = ''; // Clear input field
+    saveTasks();
+    renderTasks();
 }
 
 // Function to toggle task completion
@@ -188,7 +169,6 @@ function saveTasks() {
 function addWeatherInfo() {
     tasks = [];
     taskList.innerHTML = '';
-
     let promise = getWeatherForecast();
     promise.then(resolve, reject);
     function resolve(json) {
@@ -223,34 +203,28 @@ toggleModeBtn.addEventListener('click', () => {
         tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         taskInput.style.visibility = 'visible';
         renderTasks();
-
     } else {
         addTaskBtn.style.visibility = 'hidden';
         addWeatherBtn.style.visibility = 'visible';
         taskInput.style.visibility = 'hidden';
         addWeatherInfo();
     }
-
 });
 
 // Get the input field
 const input = document.getElementById('task-input');
-
 input.addEventListener('keypress', function (event) {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter" && mode == 'task') {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
-        //document.getElementById('add-task-btn').click();
         addTaskBtn.click();
-
     }
 });
 
 async function getWeatherForecast() {
     const url = 'https://api-open.data.gov.sg/v2/real-time/api/four-day-outlook';
-
     try {
         // Fetch data from the API
         const response = await fetch(url);
@@ -263,7 +237,6 @@ async function getWeatherForecast() {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
-
 // Render tasks on page load
 renderTasks();
 
